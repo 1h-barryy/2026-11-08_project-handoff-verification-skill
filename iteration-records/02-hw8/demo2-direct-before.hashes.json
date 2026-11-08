@@ -1,0 +1,14 @@
+{
+  ".agents/skills/delivery-integrity-check/SKILL.md": "176fbfe961b83b89c91253d97a3c1e6e64dc78bc76beadf663f194e315826b02",
+  ".gitignore": "472f568478bff9056ec56b5c5e8a7ca3d280c651d527321e1eb80892801164be",
+  "DEMONSTRATION.md": "db9397ea2fe384dbd0d450e02e63a019ddd9ef0ebab6a78c3805a4f95ddba1f7",
+  "iteration-records/01-smoke-test/result.md": "1284fa189f4db822b2864f8371a31bebfd3a7d931c08ff968cc63e75103efc06",
+  "iteration-records/01-smoke-test/SKILL.before.md": "ccaaf4a1abf5a3238d388822b2e9ca11f728db595e116226b7973de4d16bbd0b",
+  "ITERATION.md": "44960cfd573adf34c0c216cb36db2d0db46db9e3f061d484a6a9be9c16173cca",
+  "PROJECT_INTEGRITY_DESIGN.md": "789e9165645a68db230095d0a3b5869828c00a2dbff042f394cd7bc8a669ca4c",
+  "README.md": "4f7eb0d91dcb4c25747e70773582d14c4cac3acb081c5eab886d5a5be921b05b",
+  "requirements.txt": "b2a3a41cb92969a57ba10746218731ed453fe6528322ddda667df989ac494035",
+  "server.py": "13628e5077f2c8401b82aa57c47f08fde636fbf267dfc365a7960a491238b110",
+  "smoke_client.py": "2b4ed8a8bc4209b22d1e33741da2d5d21404dfea90e65c0c406699ae4692ed31",
+  "tests/test_server.py": "9fe825ad659ee8395606ac8f9a5815860c34889dbb8b9ed523ced7444c2b2332"
+}

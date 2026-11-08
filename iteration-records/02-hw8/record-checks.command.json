@@ -1,0 +1,10 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-B",
+    "iteration-records/02-hw8/verify_records.py"
+  ],
+  "cwd": "E:\\1h-barryy\\Dev\\2026-11-08_project-handoff-verification-skill",
+  "exit_code": 0,
+  "python": "3.14.3 (main, Mar 10 2026, 18:14:48) [MSC v.1944 64 bit (AMD64)]"
+}

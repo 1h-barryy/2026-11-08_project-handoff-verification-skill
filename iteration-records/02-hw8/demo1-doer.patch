@@ -1,0 +1,72 @@
+*** Begin Patch
+*** Update File: E:/1h-barryy/Dev/2026-11-08_project-handoff-verification-skill/server.py
+@@
+-    matches, declarations, entry_signals, imports = [], [], [], []
++    matches, declarations, entry_signals, imports = [], [], [], []
++    constant_definitions = []
+@@
+                 tree = ast.parse(content)
+                 for node in tree.body:
++                    targets = (node.targets if isinstance(node, ast.Assign) else
++                               [node.target] if isinstance(node, ast.AnnAssign) and node.value is not None else [])
++                    for target in targets:
++                        if isinstance(target, ast.Name) and target.id.isupper():
++                            constant_definitions.append({**evidence(name, target.lineno, "python_constant_definition"),
++                                                         "name": target.id})
+                     if isinstance(node, ast.If) and isinstance(node.test, ast.Compare):
+@@
+     related = [row["path"] for row in matches[:MAX_RESULTS]]
++    constant_definitions = sorted(
++        (row for row in constant_definitions if row["path"] in related),
++        key=lambda row: (-scores[row["path"]], row["path"], row["line"], row["name"]),
++    )
+@@
+             "task_matches": matches[:MAX_RESULTS],
++            "python_constant_definitions": constant_definitions[:MAX_RESULTS],
+@@
+             "output_truncated": {"structure": len(paths) > 200, "task_matches": len(matches) > MAX_RESULTS,
++                                 "constant_definitions": len(constant_definitions) > MAX_RESULTS,
+*** Update File: E:/1h-barryy/Dev/2026-11-08_project-handoff-verification-skill/tests/test_server.py
+@@
+     def test_real_stdio(self):
+@@
+         self.assertEqual(before, self.snapshot())
++
++    def test_constant_definitions_are_syntax_with_bounded_output(self):
++        self.write("limits.py", '"MAX_FAKE = 1"\n# MAX_COMMENT = 2\nMAX_FILES: int = 1000\n'
++                   'MAX_BYTES = 128 * 1024\nDECLARED_ONLY: int\n'
++                   'def helper():\n    MAX_LOCAL = 3\n')
++        self.write("node_modules/limits.py", "MAX_EXCLUDED = 4\n")
++        result = inspect_context(self.root, "limits")
++        definitions = result["verified_findings"]["python_constant_definitions"]
++        self.assertEqual([(row["name"], row["path"], row["line"]) for row in definitions],
++                         [("MAX_FILES", "limits.py", 3), ("MAX_BYTES", "limits.py", 4)])
++        for row in definitions:
++            self.assertEqual(row["excerpt"], (self.root / row["path"]).read_text().splitlines()[row["line"] - 1])
++        self.assertFalse(result["coverage"]["output_truncated"]["constant_definitions"])
++        with patch("server.MAX_RESULTS", 1):
++            capped = inspect_context(self.root, "limits")
++        self.assertEqual(len(capped["verified_findings"]["python_constant_definitions"]), 1)
++        self.assertTrue(capped["coverage"]["output_truncated"]["constant_definitions"])
++
++    def test_scan_limit_locations_over_real_stdio(self):
++        root = Path(__file__).resolve().parents[1]
++        result = asyncio.run(inspect_over_stdio(root, "Change the file scanning limits in our MCP server."))
++        definitions = {row["name"]: row for row in result["verified_findings"]["python_constant_definitions"]
++                       if row["path"] == "server.py"}
++        lines = (root / "server.py").read_text().splitlines()
++        for name in ("MAX_ENTRIES", "MAX_FILES", "MAX_BYTES", "MAX_TOTAL_BYTES"):
++            row = definitions[name]
++            self.assertTrue(lines[row["line"] - 1].startswith(name + " = "))
++            self.assertEqual(row["excerpt"], lines[row["line"] - 1])
++        self.assertEqual(result["coverage"]["limits"],
++                         {"entries": 6000, "files": 1000, "bytes_per_file": 131072, "total_bytes": 4194304})
+*** Update File: E:/1h-barryy/Dev/2026-11-08_project-handoff-verification-skill/README.md
+@@
+ absolute `project_root`. `coverage` reports skipped files and truncation.
++`verified_findings.python_constant_definitions` lists module-level uppercase
++Python assignments in task-related files, with names, paths, and line excerpts.
++It uses already-inspected text, returns at most 20 definitions, and reports
++truncation in `coverage.output_truncated.constant_definitions`. These are static
++assignment locations, not verified runtime values.
+*** End Patch

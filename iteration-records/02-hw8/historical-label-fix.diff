@@ -1,0 +1,26 @@
+--- iteration-records/01-smoke-test/SKILL.before.md
++++ iteration-records/02-hw8/skill.before.snapshot
+@@ -29,9 +29,8 @@
+ Assign each area one status, with findings and evidence:
+ 
+ - **PASS:** Sufficient relevant evidence supports the reviewed area, with no identified discrepancy. Limit the conclusion to what was actually examined.
+-- **PARTIAL:** Some relevant checks or claims are supported, but others remain unverified. Identify both the supported portion and the gaps.
+-- **FAIL:** Evidence demonstrates an unauthorized change, a requirement violation, or a contradicted completion claim. A known failure takes priority over partial coverage.
+-- **UNVERIFIED:** Evidence is insufficient to reach a supported conclusion for the area. Missing evidence is not proof of failure.
++- **ISSUE:** Evidence demonstrates an unauthorized change, a requirement violation, or a contradicted completion claim. A known issue takes priority over incomplete verification.
++- **UNVERIFIED:** Evidence is insufficient to reach a supported conclusion for the area. Missing evidence is not proof of failure. If some checks are supported, identify both the supported portion and the gaps.
+ 
+ ## Report
+ 
+@@ -39,8 +38,8 @@
+ 
+ | Area | Status | Findings and evidence |
+ | --- | --- | --- |
+-| Scope | PASS / PARTIAL / FAIL / UNVERIFIED | Findings with sources |
+-| Design | PASS / PARTIAL / FAIL / UNVERIFIED | Findings with sources |
+-| Verification | PASS / PARTIAL / FAIL / UNVERIFIED | Claims and supporting or missing evidence |
++| Scope | PASS / ISSUE / UNVERIFIED | Findings with sources |
++| Design | PASS / ISSUE / UNVERIFIED | Findings with sources |
++| Verification | PASS / ISSUE / UNVERIFIED | Claims and supporting or missing evidence |
+ 
+ Replace the status choices with one status per row. Cite file paths and line numbers, commit/diff references, or identifiable command output and logs when available. Separate observations from inference. End with unresolved questions and the smallest checks or evidence needed to resolve them. Recommend fixes if useful, but never perform them. Do not present the review itself as proof of runtime success.

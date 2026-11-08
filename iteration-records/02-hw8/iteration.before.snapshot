@@ -1,0 +1,48 @@
+# Iteration
+
+First draft for my review. These initial checks are separate from the two formal
+demonstrations, which have not run yet.
+
+## What We Observed
+
+- **Checker smoke test:** The skill loaded and stayed read-only, as recorded in the [first review](iteration-records/01-smoke-test/result.md). It found that the original skill used `PARTIAL` and `FAIL`, while the design required `PASS`, `ISSUE`, and `UNVERIFIED`. The record does not establish that this was a separate, fresh session.
+- **Local MCP tests:** During documentation preparation, `.venv/Scripts/python.exe -B -m unittest discover -s tests -v` ran six tests in 0.863 seconds and returned `OK`. This included a real local stdio call. The result was observed in the working session; it does not establish behavior on the two demonstration projects.
+- **Registered MCP call:** Codex CLI called `inspect_project_context` with `Change the file scanning limits in our MCP server.` The response had `isError: false`, so this was a successful invocation, not just tool discovery. It inventoried 10 files and read 9 files totaling 38,920 bytes, with no inventory or output truncation. These counts describe that earlier snapshot.
+- **Retrieval limitation:** The call identified `server.py`, the tests, dependencies, and related documentation. It also reported the scanning-limit values in `coverage.limits`. However, its source excerpts did not locate the exact definitions of those limits. Finding a relevant file did not provide enough evidence to identify the precise edit location.
+
+The local test and registered-call details above come from this project's working
+conversation. TODO: Attach an identifiable session export or capture for the
+submission so those results can be checked outside the conversation.
+
+## Revision Status
+
+The preserved [original skill](iteration-records/01-smoke-test/SKILL.before.md)
+contains the mismatched labels. The [current skill](.agents/skills/delivery-integrity-check/SKILL.md)
+uses the three labels required by the design. This supports a text revision, but
+we have not recorded a successful post-revision checker rerun. The original report
+remains unchanged as evidence of what happened.
+
+No retrieval improvement or successful rerun of the scanning-limit task is
+claimed here.
+
+## Initial Reflection — For My Review
+
+These checks support the reason I split the toolkit into context gathering and
+independent review. The checker found a concrete conflict with the design. The
+MCP connected successfully and returned useful evidence, but its excerpts were
+not precise enough to locate the scanning-limit definitions. Passing the local
+tests and making a successful tool call are useful milestones; they do not yet
+show how well the full workflow works on my existing projects.
+
+## Proposed Next Steps
+
+- Rerun the checker in a fresh session against the current design and save its actual statuses and evidence.
+- Use the scanning-limit task as a retrieval example: compare the returned excerpts with the definitions found by direct source inspection. Consider improving ranking or adding targeted follow-up inspection only after documenting the gap.
+- Run the two planned demonstrations and record what context was missing, whether the review found real problems, and any additional explanation I had to provide.
+
+TODO (after real runs): Record each observed failure, exact revision, and rerun
+result. Keep proposed changes separate from implemented and tested changes.
+
+TODO (my final review): Edit this draft in my own words and decide, using the
+demonstrations, whether the toolkit reduced repeated explanation and improved
+handoff verification. Final conclusions are still open.

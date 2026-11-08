@@ -1,0 +1,9 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"timedOut\":false,\"wake\":{\"threadId\":\"01a1bd58-6551-7a20-a1d5-d135443161aa\",\"reason\":\"actionableStatus\"},\"polls\":[{\"schemaVersion\":1,\"thread\":{\"id\":\"01a1bd58-6551-7a20-a1d5-d135443161aa\",\"status\":{\"type\":\"active\",\"activeFlags\":[\"waitingOnApproval\"]}},\"cursor\":\"{\\\"updatedAt\\\":1794178058,\\\"status\\\":{\\\"type\\\":\\\"active\\\",\\\"activeFlags\\\":[\\\"waitingOnApproval\\\"]},\\\"turnId\\\":\\\"01a1bd58-664d-7801-b6df-c55e3dc9b402\\\",\\\"turnStatus\\\":\\\"inProgress\\\",\\\"latestItemId\\\":\\\"msg_072be67d7c70e29e016af0fc047ea087d181b47a7f90b04924\\\"}\",\"revision\":1794178058,\"changed\":true,\"latestTurn\":{\"id\":\"01a1bd58-664d-7801-b6df-c55e3dc9b402\",\"status\":\"inProgress\",\"error\":null,\"startedAt\":1794178049,\"completedAt\":null,\"durationMs\":null},\"latestAssistantMessageId\":null,\"latestAssistantMessage\":null,\"latestToolMarkerId\":null,\"latestToolMarker\":null}]}"
+    }
+  ],
+  "isError": false
+}

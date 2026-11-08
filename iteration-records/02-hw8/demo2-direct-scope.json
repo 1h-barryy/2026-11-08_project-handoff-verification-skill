@@ -1,0 +1,6 @@
+{
+  "changed_existing_project_files": [
+    "README.md"
+  ],
+  "scope": "Project hashes exclude .git, .venv, __pycache__, and iteration-records/02-hw8; new evidence is saved in that excluded directory."
+}

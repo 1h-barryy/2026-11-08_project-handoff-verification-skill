@@ -1,0 +1,6 @@
+checker1 changed project files: []
+iteration changed project files: []
+checker1 status cells: ['PASS', 'PASS', 'PASS']
+skill-rerun status cells: ['UNVERIFIED', 'ISSUE', 'UNVERIFIED', 'PASS', 'PASS', 'PASS']
+doer2 changed project files while waiting for host approval: []
+Evidence checks passed. Hash scope excludes .git, .venv, __pycache__, and this coordinator evidence directory.

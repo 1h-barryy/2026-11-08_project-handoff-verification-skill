@@ -1,0 +1,11 @@
+{
+  "command": [
+    ".venv/Scripts/python.exe",
+    "-B",
+    "C:/Users/Barry/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+    ".agents/skills/delivery-integrity-check"
+  ],
+  "cwd": "E:\\1h-barryy\\Dev\\2026-11-08_project-handoff-verification-skill",
+  "exit_code": 1,
+  "python": "3.14.3 (main, Mar 10 2026, 18:14:48) [MSC v.1944 64 bit (AMD64)]"
+}

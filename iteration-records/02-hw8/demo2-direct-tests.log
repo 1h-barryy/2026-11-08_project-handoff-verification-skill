@@ -1,0 +1,13 @@
+test_constant_definitions_are_syntax_with_bounded_output (test_server.InspectorTests.test_constant_definitions_are_syntax_with_bounded_output) ... ok
+test_entry_point_is_code_not_string_and_identifiers_rank_first (test_server.InspectorTests.test_entry_point_is_code_not_string_and_identifiers_rank_first) ... ok
+test_evidence_impact_and_no_mutation (test_server.InspectorTests.test_evidence_impact_and_no_mutation) ... ok
+test_exclusions_and_root_boundary (test_server.InspectorTests.test_exclusions_and_root_boundary) ... ok
+test_js_relative_import (test_server.InspectorTests.test_js_relative_import) ... ok
+test_limits_and_invalid_input (test_server.InspectorTests.test_limits_and_invalid_input) ... ok
+test_real_stdio (test_server.InspectorTests.test_real_stdio) ... ok
+test_scan_limit_locations_over_real_stdio (test_server.InspectorTests.test_scan_limit_locations_over_real_stdio) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 1.589s
+
+OK

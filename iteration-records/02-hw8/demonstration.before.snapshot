@@ -1,0 +1,52 @@
+# Demonstrations
+
+The formal demonstrations have not run yet. The steps below are a plan, not results.
+
+## Testing Structure
+
+1. Record the target project's path, version or starting diff, task, and governing design documents.
+2. Configure the MCP launch root for that project and reconnect the host. Call `inspect_project_context` with the real task; save the arguments and response. Confirm the returned `project_root` is correct.
+3. Make the agreed small update. Save the diff and the checks actually performed.
+4. Start a separate, fresh checker session. Supply the task, current requirements, baseline, changes, and verification evidence. Save its scope, design, and verification report, and compare the files before and after the review to check that it remained read-only.
+5. Evaluate whether the context and report were useful. Record any failure, revision, and rerun in [ITERATION.md](ITERATION.md).
+
+From the toolkit root, these PowerShell commands run the existing tests and an
+optional local stdio check. Replace the example path and task before running:
+
+```powershell
+.venv/Scripts/python.exe -B -m unittest discover -s tests -v
+.venv/Scripts/python.exe -B smoke_client.py --project-root "E:/path/to/target-project" --task "Describe the agreed update"
+```
+
+The local client does not replace evidence of a registered host calling the tool.
+For that call, ask the agent to use `project-context.inspect_project_context`
+with the agreed task and report the returned evidence before editing.
+
+Keep the date, project/toolkit versions, commands, actual output, changed files,
+and session boundaries with each record. Do not include credentials.
+
+## 1. Market Under Stress
+
+Planned task: make a small update to the project description using the current
+design records. Check that older plans do not override the governing design.
+
+- TODO: Record the real task, project version, and governing design records.
+- TODO: Save the actual MCP call and relevant output, including limitations.
+- TODO: Link the changes and verification evidence.
+- TODO: Save the checker report from a separate, fresh session and evidence that it remained read-only.
+- TODO (my evaluation): Did the MCP find the useful records? Did the checker catch outdated decisions or unsupported claims? What did I still need to explain?
+
+## 2. Financial Analyst Arcade
+
+Planned task: prepare a short handoff that distinguishes the local game from the
+Web Edition backend and accurately describes API verification.
+
+- TODO: Record the real handoff task and local-game/Web Edition boundaries.
+- TODO: Save the actual MCP call and relevant output, including limitations.
+- TODO: Link the changes and distinguish local, mocked, and live API evidence.
+- TODO: Save the checker report from a separate, fresh session and evidence that it remained read-only.
+- TODO (my evaluation): Were project boundaries clear? Did the report distinguish local or mocked checks from successful live requests?
+
+## Author reflection
+
+TODO (author): Describe what the demonstrations showed and what remains unverified.

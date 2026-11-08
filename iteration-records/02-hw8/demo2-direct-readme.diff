@@ -1,0 +1,45 @@
+--- iteration-records/02-hw8/demo2-direct-readme.before.snapshot
++++ README.md
+@@ -84,18 +84,35 @@
+ 
+ ## Use the MCP in an agent session
+ 
+-Configure the host to launch the virtual environment's Python executable with
+-these arguments, replacing both example paths with absolute paths:
++Configure the host to launch the Python environment installed for this toolkit.
++Keep the executable and server script in the toolkit directory; only
++`--project-root` points to the project you want to inspect. For example, replace
++these absolute paths with your own (the target must be an existing directory):
+ 
+ ```text
+-Command: <toolkit>/.venv/Scripts/python.exe
+-Arguments: -B <toolkit>/server.py --project-root <project-to-inspect>
++Command: C:/tools/project-context/.venv/Scripts/python.exe
++Arguments: -B C:/tools/project-context/server.py --project-root D:/work/customer-app
+ ```
+ 
+ The existing local `project-context` registration already targets this toolkit.
+-For another project, its launch configuration must specify that project's root;
+-the tool argument cannot switch roots. Start or reconnect the host's server after
+-changing its launch configuration.
++Change its launch arguments and restart or reconnect the server to select another
++root. `inspect_project_context` accepts only `task`; putting a path in the task
++does not switch roots. Relative roots resolve against the server's launch working
++directory, so use absolute paths to avoid inspecting the wrong directory. In host
++settings with an argument list, enter each argument separately, keeping a path
++containing spaces as one argument.
++
++You can check another root without changing host registration by running the
++smoke client from PowerShell (replace these example paths):
++
++```powershell
++& "C:/tools/project-context/.venv/Scripts/python.exe" -B "C:/tools/project-context/smoke_client.py" --project-root "D:/work/customer-app" --task "Find entry points and dependency declarations"
++```
++
++The client launches the toolkit's server, makes a real stdio tool call, and prints
++the response. Confirm its absolute `project_root` matches your intended target.
++After reconnecting the host, also confirm `project_root` in the registered tool's
++response; the smoke client does not update or verify the host's configuration.
+ 
+ Ask the agent: “Call `project-context.inspect_project_context` with task
+ `Change the file scanning limits in our MCP server.` Report the actual output

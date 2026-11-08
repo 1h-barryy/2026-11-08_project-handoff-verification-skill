@@ -1,0 +1,138 @@
+--- iteration-records/02-hw8/demonstration.before.snapshot
++++ DEMONSTRATION.md
+@@ -1,52 +1,99 @@
+ # Demonstrations
+ 
+-The formal demonstrations have not run yet. The steps below are a plan, not results.
++These are the actual toolkit-local runs from November 8, 2026. The current
++request replaces the earlier planned tasks for Market Under Stress and Financial
++Analyst Arcade with two tasks in this repository. Neither external project was tested.
+ 
+-## Testing Structure
++Environment: Windows PowerShell, Python 3.14.3, local .venv. Git HEAD was
++47a82d146e93f048fd0b67224692beaea6b763a2; most implementation files were already
++untracked. The recorded patch and snapshots, not HEAD alone, establish the
++Demonstration 1 change. No commit or push was made.
+ 
+-1. Record the target project's path, version or starting diff, task, and governing design documents.
+-2. Configure the MCP launch root for that project and reconnect the host. Call `inspect_project_context` with the real task; save the arguments and response. Confirm the returned `project_root` is correct.
+-3. Make the agreed small update. Save the diff and the checks actually performed.
+-4. Start a separate, fresh checker session. Supply the task, current requirements, baseline, changes, and verification evidence. Save its scope, design, and verification report, and compare the files before and after the review to check that it remained read-only.
+-5. Evaluate whether the context and report were useful. Record any failure, revision, and rerun in [ITERATION.md](ITERATION.md).
++## 1. More precise MCP source locations
+ 
+-From the toolkit root, these PowerShell commands run the existing tests and an
+-optional local stdio check. Replace the example path and task before running:
++Task: improve source locations for file-scanning limits without changing scan
++behavior or boundaries. Before editing, the doer called the registered
++**project-context.inspect_project_context** with this exact task:
+ 
+-```powershell
+-.venv/Scripts/python.exe -B -m unittest discover -s tests -v
+-.venv/Scripts/python.exe -B smoke_client.py --project-root "E:/path/to/target-project" --task "Describe the agreed update"
+-```
++> Inspect this MCP project's file scanning limits and scan boundaries. Identify the relevant implementation and tests, and locate the exact source definitions of the limits so source-location reporting can be improved without changing existing behavior or boundaries.
+ 
+-The local client does not replace evidence of a registered host calling the tool.
+-For that call, ask the agent to use `project-context.inspect_project_context`
+-with the agreed task and report the returned evidence before editing.
++The [actual transcript](iteration-records/02-hw8/demo1-doer.transcript.jsonl)
++contains the call and response at lines 6–7. The response found server.py and
++reported the limits, but its three excerpts missed their definitions.
+ 
+-Keep the date, project/toolkit versions, commands, actual output, changed files,
+-and session boundaries with each record. Do not include credentials.
++The [recorded patch](iteration-records/02-hw8/demo1-doer.patch) changed server.py,
++tests/test_server.py, and five README lines. It adds a bounded list of Python
++constant definitions from already-read text, with names, paths, and line excerpts.
++Scan limits and existing matching logic stay unchanged.
+ 
+-## 1. Market Under Stress
++The transcript records eight passing tests (line 12) and a real stdio rerun
++(line 15). The latter returned MAX_ENTRIES, MAX_FILES, MAX_BYTES, and
++MAX_TOTAL_BYTES at server.py:27–30, including “MAX_BYTES = 128 * 1024”.
++These are local MCP results, not external-project or live API tests.
+ 
+-Planned task: make a small update to the project description using the current
+-design records. Check that older plans do not override the governing design.
++A fresh independent checker used **$delivery-integrity-check**. Its
++[report](iteration-records/02-hw8/checker1.result.md) and
++[transcript](iteration-records/02-hw8/checker1.transcript.jsonl) are preserved.
+ 
+-- TODO: Record the real task, project version, and governing design records.
+-- TODO: Save the actual MCP call and relevant output, including limitations.
+-- TODO: Link the changes and verification evidence.
+-- TODO: Save the checker report from a separate, fresh session and evidence that it remained read-only.
+-- TODO (my evaluation): Did the MCP find the useful records? Did the checker catch outdated decisions or unsupported claims? What did I still need to explain?
++| Area | Result | Relevant finding |
++| --- | --- | --- |
++| Scope | PASS | Constant evidence, two tests, and README documentation fit the task. |
++| Design | PASS | Bounded static evidence uses already-read files and reports truncation. |
++| Verification | PASS | Supplied logs support eight tests and exact locations over real stdio. |
+ 
+-## 2. Financial Analyst Arcade
++Checker excerpt: “Runtime results above are supplied evidence, not independently
++rerun tests.” It performed read-only inspection and hash comparisons. The
++coordinator's before/after project hashes also match.
+ 
+-Planned task: prepare a short handoff that distinguishes the local game from the
+-Web Edition backend and accurately describes API verification.
++TODO (my review): Do I agree with Checker 1? Did the new locations reduce the
++extra source inspection I needed?
+ 
+-- TODO: Record the real handoff task and local-game/Web Edition boundaries.
+-- TODO: Save the actual MCP call and relevant output, including limitations.
+-- TODO: Link the changes and distinguish local, mocked, and live API evidence.
+-- TODO: Save the checker report from a separate, fresh session and evidence that it remained read-only.
+-- TODO (my evaluation): Were project boundaries clear? Did the report distinguish local or mocked checks from successful live requests?
++## 2. README instructions for another project root — pending
+ 
+-## Author reflection
++Task: improve only README instructions using the actual server.py and
++smoke_client.py: distinguish toolkit executable paths from the inspected root,
++explain startup/reconnection, and confirm the returned project_root.
+ 
+-TODO (author): Describe what the demonstrations showed and what remains unverified.
++A separate doer session was started. Its
++[captured transcript](iteration-records/02-hw8/demo2-pending.transcript.jsonl)
++contains the actual attempted **project-context.inspect_project_context** call
++and complete task argument. Argument excerpt:
++
++> Improve only README.md instructions for using our MCP with a different project root, based on actual server.py and smoke_client.py.
++
++The call has no returned result in that capture. The
++[host state](iteration-records/02-hw8/demo2-pending.host-state.json) still reports
++**waitingOnApproval**, even after the user reported resolving approval twice.
++The README is unchanged from its saved baseline. This is an attempted call,
++not a successful demonstration. Checker 2 has not run because there is no
++completed change to review.
++
++Resume **HW8 Demonstration 2 — README doer**, task
++**01a1bd58-6551-7a20-a1d5-d135443161aa**, at its pending MCP tool approval.
++After the real call returns and the doer finishes, save its complete transcript
++and README diff, then start a new read-only checker session with
++**$delivery-integrity-check**. Add completed records without replacing the
++pending capture. If the host cannot resume it, stop that task before starting
++a replacement fresh doer session to avoid two writers.
++
++TODO (after completion): Record Checker 2's actual findings and my agreement.
++
++## Session and verification records
++
++Separate sessions were created with the Codex host's create_thread, not by
++simulating reports in the coordinator. Each received a bounded task and artifact
++paths. The coordinator saved reports; the checkers did not write them.
++
++| Run | Session ID |
++| --- | --- |
++| Original doer | 01a1bd4e-4f08-7033-9c3c-4d54680aa418 (first completed turn) |
++| Checker 1 | 01a1bd55-b642-7da3-b065-124a45d57657 |
++| Skill rerun | 01a1bd57-4dac-7443-9eed-cde03d4b4507 |
++| Doer 2, pending | 01a1bd58-6551-7a20-a1d5-d135443161aa |
++
++See the [evidence index](iteration-records/02-hw8/INDEX.md) for exports, snapshots,
++commands, final verification results, and the scope of hash checks.
++
++TODO (my final reflection): Explain what these runs showed, what I agree with,
++and what still needs testing. Demonstration 2 and the final submission review
++are not complete.

@@ -1,0 +1,13 @@
+Reviewed Demonstration 1: improve scan-limit source locations while preserving existing behavior and boundaries. The baseline is the transcript’s original request, pre-edit reads, and actual patch—not Git HEAD. I observed that all three current files are byte-identical to their `demo1-*.after.snapshot` files.
+
+Your current authorization supersedes the earlier two-project demonstration plan. Later HW8 documentation completeness is outside this review.
+
+| Area | Status | Findings and evidence |
+| --- | --- | --- |
+| Scope | PASS | The recorded patch adds constant-definition evidence, two relevant tests, and five README lines. It changes neither scan limits nor existing matching logic. No checker edit, commit, or push appears in the recorded actions. See transcript lines 2, 11, and 16 ([record](/E:/1h-barryy/Dev/2026-11-08_project-handoff-verification-skill/iteration-records/02-hw8/demo1-doer.transcript.jsonl:11)). |
+| Design | PASS | The implementation extracts syntax from already-read Python files, supplies source lines, caps output, and reports truncation ([server.py](/E:/1h-barryy/Dev/2026-11-08_project-handoff-verification-skill/server.py:166)). Documentation correctly distinguishes assignment locations from runtime values ([README](/E:/1h-barryy/Dev/2026-11-08_project-handoff-verification-skill/README.md:67)). This satisfies the bounded static-evidence requirement ([design](/E:/1h-barryy/Dev/2026-11-08_project-handoff-verification-skill/PROJECT_INTEGRITY_DESIGN.md:15)). |
+| Verification | PASS | Supplied transcript evidence shows the initial registered MCP invocation, eight passing tests, and a subsequent real stdio response locating all four limits at `server.py:27–30` (transcript lines 6–7, 12, 15). The tests check syntax exclusions, exact excerpts, truncation, unchanged limit values, and real stdio transport ([tests](/E:/1h-barryy/Dev/2026-11-08_project-handoff-verification-skill/tests/test_server.py:100)). These are supported local results, not claims about external projects or APIs. |
+
+The current skill uses exactly `PASS`, `ISSUE`, and `UNVERIFIED`, matching the design; the earlier status-label discrepancy is absent ([skill](/E:/1h-barryy/Dev/2026-11-08_project-handoff-verification-skill/.agents/skills/delivery-integrity-check/SKILL.md:31), [design](/E:/1h-barryy/Dev/2026-11-08_project-handoff-verification-skill/PROJECT_INTEGRITY_DESIGN.md:25)).
+
+No blocking findings or unresolved questions for this task. Runtime results above are supplied evidence, not independently rerun tests. I performed only read-only inspection and hash comparisons; no files were written. This review does not establish that either previously planned external project was tested or that the entire HW8 submission is complete.
