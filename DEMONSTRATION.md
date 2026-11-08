@@ -1,13 +1,13 @@
 # Demonstrations
 
-These are the actual toolkit-local runs from November 8, 2026. The current
-request replaces the earlier planned tasks for Market Under Stress and Financial
-Analyst Arcade with two tasks in this repository. Neither external project was tested.
+I ran both demonstrations in this repository on November 8, 2026. I chose these
+tasks instead of the planned tasks in Market Under Stress and Financial Analyst
+Arcade. Neither external project was tested.
 
 Environment: Windows PowerShell, Python 3.14.3, local .venv. Git HEAD was
 47a82d146e93f048fd0b67224692beaea6b763a2; most implementation files were already
-untracked. The recorded patch and snapshots, not HEAD alone, establish the
-Demonstration 1 change. No commit or push was made.
+untracked, so the patch and snapshots show the Demonstration 1 changes more
+precisely than HEAD alone. No commit or push was made during those runs.
 
 ## 1. More precise MCP source locations
 
@@ -45,33 +45,31 @@ Checker excerpt: “Runtime results above are supplied evidence, not independent
 rerun tests.” It performed read-only inspection and hash comparisons. The
 coordinator's before/after project hashes also match.
 
-TODO (my review): Do I agree with Checker 1? Did the new locations reduce the
-extra source inspection I needed?
+### My Evaluation
 
-## My Evaluation
 I agree with the checker's assessment. It reviewed the actual implementation changes and supporting test evidence rather than just trusting the doer's report. The three PASS results were reasonable based on what was verified.
 
 ## 2. README instructions for another project root — reviewed
 
 ### Independent Checker 2 — November 8, 2026
 
-Reviewed task: make a small README-only improvement for using the MCP with
-another local project root, inspect with the registered tool before editing,
-verify against implementation, run relevant tests, and preserve actual evidence.
+The task was to improve the README instructions for another local project root.
+The doer had to call the registered tool first, check the instructions against
+the code, run the relevant tests, and save the evidence.
 The original user request is in
 [demo2-direct.transcript.jsonl](iteration-records/02-hw8/demo2-direct.transcript.jsonl):1.
-It explicitly authorizes the direct doer run, superseding the pending attempt
-described below. The governing design is PROJECT_INTEGRITY_DESIGN.md:13–25
-(configured-root, read-only local inspection and evidence-based checking), with
-the current task determining this demonstration's scope. The original external
-project plan at design lines 29–30 is not evidence those projects were tested.
+That request allowed the direct run to replace the pending attempt below.
+The review used PROJECT_INTEGRITY_DESIGN.md:13–25: inspect the configured root
+without changing it, and support findings with evidence. The task defined the
+scope of this demonstration; the external projects planned at design lines 29–30
+were not tested.
 
-Baseline: [before snapshot](iteration-records/02-hw8/demo2-direct-readme.before.snapshot)
-to [after snapshot](iteration-records/02-hw8/demo2-direct-readme.after.snapshot),
-using the [bounded diff](iteration-records/02-hw8/demo2-direct-readme.diff).
-The large README diff against Git HEAD includes earlier work and is not the
-Demonstration 2 change. Completion claims were checked from the
-[doer report](iteration-records/02-hw8/demo2-direct.result.md), not accepted as proof.
+The checker compared the [before snapshot](iteration-records/02-hw8/demo2-direct-readme.before.snapshot)
+and [after snapshot](iteration-records/02-hw8/demo2-direct-readme.after.snapshot)
+using the [diff](iteration-records/02-hw8/demo2-direct-readme.diff).
+The README diff against HEAD at the time also included earlier work. The checker
+checked the claims in the [doer report](iteration-records/02-hw8/demo2-direct.result.md)
+against the files and logs. Source line numbers below refer to the reviewed version.
 
 | Area | Status | Findings and evidence |
 | --- | --- | --- |
@@ -79,28 +77,23 @@ Demonstration 2 change. Completion claims were checked from the
 | Design | PASS | README.md:87–116 matches server.py:275–285: the root is required, strictly resolved at startup, checked as a directory, and captured by a task-only tool. server.py:238 returns that root. smoke_client.py:13–26 launches its sibling server with sys.executable and a resolved root; lines 30–35 parse arguments and print the response. Observed C:/Users/Barry/.codex/config.toml:151–153 configures the toolkit Python and server with this toolkit as --project-root, supporting the local-registration statement. Restart/reconnect guidance follows from startup root capture. The instructions preserve the design's configured-root boundary and distinguish smoke execution from host configuration. |
 | Verification | PASS | Supplied transcript lines 5–6 record the registered MCP invocation and returned output before the README patch at line 10. The display is truncated; demo2-direct.mcp.json preserves the supplied full payload. Supplied demo2-direct-tests.log and demo2-direct-tests.command.json record eight tests passing in 1.589 seconds, exit 0, using local .venv Python 3.14.3 on Windows; transcript line 11 corroborates the output. Observed tests/test_server.py:93–98 calls the real stdio client on a temporary root, asserts the returned root, and checks its file snapshot; lines 117–128 check scan-limit locations over stdio. The supplied diff-check command/log record exit 0 with no output. This supports the bounded claims, not a host switch or external-project run. |
 
-Evidence classification: implementation/configuration reads and hash comparisons
-were personally observed by this checker. Runtime results are supplied evidence,
-not independently rerun tests. The transcript export ends during evidence capture
-as stated in demo2-direct.provenance.json; it is not a complete final-turn export.
-The checker ran no tests because they create temporary files. No host setting,
-reviewed source, README, test, or skill was changed. The sole report write to this
-file follows the user's explicit save instruction, an exception to the skill's
-normal no-report-writing boundary; this run is not literally a zero-write run.
+The checker read the code and configuration and compared file hashes. It reviewed
+the supplied test logs without rerunning tests, which create temporary files.
+As demo2-direct.provenance.json explains, the transcript ends during evidence
+capture, before the final turn was complete. The checker changed no host settings,
+source, README, tests, or skill. At my request, it saved its report in this file.
+That was an exception to the skill's usual rule against writing reports.
 
-Unresolved limits and smallest follow-ups: there is no evidence of changing and
-reconnecting the registered host to a different root. If that outcome is later
-claimed, supply the changed launch arguments and a post-reconnection tool response
-whose absolute project_root matches the intended directory. The placeholder
-C:/tools and D:/work commands were not executed verbatim. No further runtime check
-is needed to support the narrower documentation claims reviewed here. The old
-pending host task's final state is not established by its stop instruction; inspect
-that task's current host state if closure must be established. ITERATION.md and the
-historical notes below still describe the earlier pending attempt; they do not
-override the direct-run evidence. Full toolkit/submission completion is outside
-this review. Personal agreement and final reflection remain for the author.
+The review did not verify reconnecting the registered host to another root. That
+would need the changed launch arguments and a tool response with the intended
+absolute project_root after reconnection. The C:/tools and D:/work paths are
+placeholders and were not run as written. The documentation claims did not need
+another runtime check. A stop instruction was sent to the old pending task, but
+its final state still needs a host-state check if closure must be confirmed.
+The earlier pending records describe that attempt, not the completed direct run.
+This review did not establish that the whole toolkit or submission was complete.
 
-## My Evulation
+### My Evaluation
 
 I agree with the checker's assessment. The MCP tool was successfully called, all 8 tests passed, and git diff --check found no issues. The server, checker skill, and tests remained unchanged, so the README update stayed within the intended scope.
 
@@ -119,28 +112,25 @@ and complete task argument. Argument excerpt:
 
 > Improve only README.md instructions for using our MCP with a different project root, based on actual server.py and smoke_client.py.
 
-The call has no returned result in that capture. The
-[host state](iteration-records/02-hw8/demo2-pending.host-state.json) still reports
+The call has no returned result in that capture. The saved
+[host state](iteration-records/02-hw8/demo2-pending.host-state.json) reports
 **waitingOnApproval**, even after the user reported resolving approval twice.
-At that capture, the README was unchanged from its saved baseline. This was an attempted call,
-not a successful demonstration. Checker 2 had not yet run because there was no
-completed change to review. The direct run and review above supersede that status.
+At that point, the README was unchanged and there was no completed change for
+Checker 2 to review. The direct run and review above replaced this blocked attempt.
 
 The earlier recovery instruction was to resume **HW8 Demonstration 2 — README doer**, task
 **01a1bd58-6551-7a20-a1d5-d135443161aa**, at its pending MCP tool approval.
-After the real call returns and the doer finishes, save its complete transcript
-and README diff, then start a new read-only checker session with
-**$delivery-integrity-check**. Add completed records without replacing the
-pending capture. If the host cannot resume it, stop that task before starting
-a replacement fresh doer session to avoid two writers.
-
-TODO (after completion): Record Checker 2's actual findings and my agreement.
+The plan was to save the completed transcript and README diff, then start a fresh
+read-only checker using **$delivery-integrity-check**. If the task could not resume,
+it was to be stopped before starting a replacement, to avoid two writers.
+The pending capture was kept alongside the later direct-run evidence.
 
 ## Session and verification records
 
-Separate sessions were created with the Codex host's create_thread, not by
-simulating reports in the coordinator. Each received a bounded task and artifact
-paths. The coordinator saved reports; the checkers did not write them.
+The sessions listed below were created with the Codex host's create_thread.
+Each received a specific task and file paths. The coordinator saved the reports
+for Checker 1 and the skill rerun. Checker 2 saved its findings above at my request;
+its session provenance is not saved here.
 
 | Run | Session ID |
 | --- | --- |
@@ -152,6 +142,6 @@ paths. The coordinator saved reports; the checkers did not write them.
 See the [evidence index](iteration-records/02-hw8/INDEX.md) for exports, snapshots,
 commands, final verification results, and the scope of hash checks.
 
-TODO (my final reflection): Explain what these runs showed, what I agree with,
-and what still needs testing. Demonstration 2 and the final submission review
-are not complete.
+Both demonstrations and my evaluations are recorded above. My overall reflection
+is in ITERATION.md. Testing across other projects and the host root-switch check
+remain open.

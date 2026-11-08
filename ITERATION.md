@@ -1,32 +1,32 @@
 # Iteration
 
-This record separates the original failures, earlier fixes, and the fresh rerun
-on November 8, 2026. The original evidence is preserved rather than rewritten.
+This records what failed, what was already fixed, and what changed in the rerun
+on November 8, 2026. The original evidence is kept unchanged.
 
 ## Status labels
 
 The [first smoke-test report](iteration-records/01-smoke-test/result.md) identified
-a real mismatch: the original skill prescribed PARTIAL and FAIL, while the design
+a mismatch: the original skill used PARTIAL and FAIL, while the design
 requires PASS, ISSUE, and UNVERIFIED. The old report itself used the mismatched
 labels. Its [original session export](iteration-records/02-hw8/original-checker.transcript.jsonl)
-is now saved too; that historical review is not a post-fix test.
+is saved too. That review happened before the fix.
 
-The mismatch was already fixed before this workflow. Both direct inspection and
-[Checker 1](iteration-records/02-hw8/checker1.result.md) confirmed that it is absent
-from the current skill. The [historical diff](iteration-records/02-hw8/historical-label-fix.diff)
-shows the earlier correction. I am not claiming that correction as a new change.
+The labels were already fixed before this run. Direct inspection and
+[Checker 1](iteration-records/02-hw8/checker1.result.md) confirmed the current
+skill uses the right labels. The [historical diff](iteration-records/02-hw8/historical-label-fix.diff)
+shows that earlier correction; it was not a new change in this iteration.
 
 The new small improvement adds a final report check:
 
 > Before returning, check each status cell against the current governing status vocabulary. Keep superseded labels from historical reports only in clearly marked quotations, not in the current status cells.
 
-This guard addresses the demonstrated report-format failure. The
+This extra check addresses the label mismatch found in the first report. The
 [before snapshot](iteration-records/02-hw8/skill.before.snapshot),
 [after snapshot](iteration-records/02-hw8/skill.after.snapshot), and
 [exact diff](iteration-records/02-hw8/skill-guard.diff) preserve the change.
 
-A fresh independent session used the revised skill to review historical and
-current artifacts separately. Its [actual report](iteration-records/02-hw8/skill-rerun.result.md)
+A fresh independent session used the revised skill to review the old and current
+files separately. Its [report](iteration-records/02-hw8/skill-rerun.result.md)
 and [transcript](iteration-records/02-hw8/skill-rerun.transcript.jsonl) show:
 
 | Artifact reviewed | Scope | Design | Verification |
@@ -34,9 +34,9 @@ and [transcript](iteration-records/02-hw8/skill-rerun.transcript.jsonl) show:
 | Historical skill/report | UNVERIFIED | ISSUE | UNVERIFIED |
 | Current iteration | PASS | PASS | PASS |
 
-All six status cells use the governing vocabulary. The checker quotes the old
-labels only in its explanation and distinguishes the earlier correction from
-the new guard. Its project-file hashes are unchanged before and after review.
+All six status cells use the required labels. The checker quotes the old labels
+only in its explanation and separates the earlier fix from the new check.
+Project-file hashes matched before and after the review.
 
 Checker excerpt: “This demonstrates one compliant report after revision. It does
 not establish that the guard caused compliance, general reliability,
@@ -44,8 +44,8 @@ external-project testing, or completion of the full toolkit.”
 
 The optional skill-format validator could not start because this environment
 lacks PyYAML ([command and exit status](iteration-records/02-hw8/skill-validation.command.json),
-[error log](iteration-records/02-hw8/skill-validation.log)). That is not a passing
-format-validation test; the separate behavioral review did run.
+[error log](iteration-records/02-hw8/skill-validation.log)). Format validation did
+not pass, but the separate checker rerun did run.
 
 ## MCP retrieval
 
@@ -57,16 +57,14 @@ The [demonstration record](DEMONSTRATION.md) links the actual patch and output.
 
 ## What remains
 
-Demonstration 1 and the fresh skill rerun are complete. Demonstration 2 remains
-paused at a host approval gate before its MCP result and README edit; no Checker 2
-result is claimed. The saved pending transcript must be supplemented after the
-host resumes. The two originally named external projects were not tested.
+Both demonstrations and the skill rerun are complete. Demonstration 2's first
+attempt was blocked at host approval; the later direct run and Checker 2 findings
+are recorded in DEMONSTRATION.md. The original pending evidence is still saved.
 
-TODO (my review): Decide whether I agree with the checker findings and whether
-the extra final-status check is useful. Edit this explanation in my own words.
-
-TODO (my final reflection): After Demonstration 2 finishes, explain whether the
-workflow reduced repeated explanation and made handoff claims easier to verify.
+The two external projects were not tested, and switching the registered host to
+another root remains unverified. Checker 2's session provenance still needs to be
+saved. The evidence-checking script still expects the earlier README snapshot,
+and the optional skill-format validator still needs PyYAML.
 
 ### My Reflection
 
